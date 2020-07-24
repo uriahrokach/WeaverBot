@@ -1,0 +1,19 @@
+{
+  "name": "weaverbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uriahrokach/WeaverBot.git"
+  },
+  "author": "Uriah Rokach",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uriahrokach/WeaverBot/issues"
+  },
+  "homepage": "https://github.com/uriahrokach/WeaverBot#readme"
+}
