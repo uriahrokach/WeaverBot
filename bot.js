@@ -6,10 +6,13 @@ const fs = require('fs');
 const client = new Discord.Client();
 
 /** The prifixs for the command*/
-const PREFIX = '!w'
+const PREFIX = '!w '
 
 /** Discord bot token*/
 const token = 'NzM2MjI0MDA1OTk2MDE5Nzkz.XxrsCQ.kD_Mz6EdsN1QuVXvXqU4HXmlnBg';
+
+/** Command Dictionary */
+let commands = {};
 
 /**Command files for server*/
 const comamndFiles = fs.readdirSync('./commands').filter( 
@@ -17,7 +20,7 @@ const comamndFiles = fs.readdirSync('./commands').filter(
 );
 for (const file of comamndFiles) {
     const command = require(`./commands/${file}`);
-    client.commands.set(command.name, command);
+    commands[command.name] = command;
 }
 
 /**
@@ -27,22 +30,27 @@ client.once('ready', () => {
     console.log('WeaverBot is online');
 });
 
+
 /**
- * Analyzes a command and returns a it's fragments. If the message is not a command,
- * return null.
+ * Checks if a message was in the right command format.
  * 
- * @param {*} message The message sent by the user.
+ * @param {String} message 
+ */
+const isCommand = message => {
+    return message.content.startsWith(PREFIX) && !message.author.bot;
+}
+
+/**
+ * Analyzes a command and returns a it's fragments.
+ * 
+ * @param {String} message The message sent by the user.
  */
 const analize_command = message => {
-   if(!message.content.startsWith(PREFIX) || message.author.bot){
-       return null;
-   }
-
    const fragments = message.content.toLowerCase().slice(PREFIX.length).split(/ +/);
    const command  = fragments[0];
    const args = fragments.slice(1);
    
-   return command, args;
+   return {command, args};
 };
 
 /**
@@ -50,9 +58,14 @@ const analize_command = message => {
  * calculates it.
  */
 client.on('message', message => {
-    const command, args = analize_command(message);
-    if(command) {
-        client.commands.get(command).execute(args)
+    if(isCommand(message)) {
+        const {command, args} = analize_command(message);
+        if(command in commands){
+            commands[command].execute(message, args);
+        }
+        else {
+            message.channel.send(`Command ${command} does not exist. Please try again.`);
+        }
     }
 });
 
