@@ -1,5 +1,6 @@
 /** Imports */
 const Discord = require('discord.js');
+const fs = require('fs');
 
 /** The Discord client*/
 const client = new Discord.Client();
@@ -9,6 +10,15 @@ const PREFIX = '!w'
 
 /** Discord bot token*/
 const token = 'NzM2MjI0MDA1OTk2MDE5Nzkz.XxrsCQ.kD_Mz6EdsN1QuVXvXqU4HXmlnBg');
+
+/**Command files for server*/
+const comamndFiles = fs.readdirSync('./commands').filter( 
+    file => file.endsWith('.js')
+);
+for (const file of comamndFiles) {
+    const command = require(`./commands/${file}`);
+    client.commands.set(command.name, command);
+}
 
 /**
  * Startup response when logging into the server.
@@ -42,7 +52,7 @@ const analize_command = message => {
 client.on('message', message => {
     const command, args = analize_command(message);
     if(command) {
-
+        client.commands.get(command).execute(args)
     }
 });
 
