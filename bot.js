@@ -6,10 +6,7 @@ const fs = require('fs');
 const client = new Discord.Client();
 
 /** The prifixs for the command*/
-const PREFIX = '!w '
-
-/** Discord bot token*/
-const token = 'NzM2MjI0MDA1OTk2MDE5Nzkz.XxrsCQ.7AHveAAamlHlPNWW3Y1OrwXPMNM';
+const PREFIX = '!w ';
 
 /** Command Dictionary */
 let commands = {};
@@ -70,4 +67,4 @@ client.on('message', message => {
 });
 
 
-client.login(token);
+client.login(process.env.BOT_LOGIN);
