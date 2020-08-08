@@ -34,7 +34,7 @@ client.once('ready', () => {
 /**
  * Checks if a message was in the right command format.
  * 
- * @param {String} message 
+ * @param {String} message the message given.
  */
 const isCommand = message => {
     return message.content.startsWith(PREFIX) && !message.author.bot;
