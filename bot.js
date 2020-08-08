@@ -9,7 +9,7 @@ const client = new Discord.Client();
 const PREFIX = '!w '
 
 /** Discord bot token*/
-const token = 'NzM2MjI0MDA1OTk2MDE5Nzkz.XxrsCQ.kD_Mz6EdsN1QuVXvXqU4HXmlnBg';
+const token = 'NzM2MjI0MDA1OTk2MDE5Nzkz.XxrsCQ.7AHveAAamlHlPNWW3Y1OrwXPMNM';
 
 /** Command Dictionary */
 let commands = {};
