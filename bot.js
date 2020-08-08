@@ -15,7 +15,7 @@ const token = 'NzM2MjI0MDA1OTk2MDE5Nzkz.XxrsCQ.7AHveAAamlHlPNWW3Y1OrwXPMNM';
 let commands = {};
 
 /**Command files for server*/
-const comamndFiles = fs.readdirSync('./commands').filter( 
+const comamndFiles = fs.readdirSync('./commands').filter(
     file => file.endsWith('.js')
 );
 for (const file of comamndFiles) {
@@ -45,12 +45,12 @@ const isCommand = message => {
  * 
  * @param {String} message The message sent by the user.
  */
-const analize_command = message => {
-   const fragments = message.content.toLowerCase().slice(PREFIX.length).split(/ +/);
-   const command  = fragments[0];
-   const args = fragments.slice(1);
-   
-   return {command, args};
+const analizeCommand = message => {
+    const fragments = message.content.toLowerCase().slice(PREFIX.length).split(/ +/);
+    const command = fragments[0];
+    const args = fragments.slice(1);
+
+    return { command, args };
 };
 
 /**
@@ -58,9 +58,9 @@ const analize_command = message => {
  * calculates it.
  */
 client.on('message', message => {
-    if(isCommand(message)) {
-        const {command, args} = analize_command(message);
-        if(command in commands){
+    if (isCommand(message)) {
+        const { command, args } = analizeCommand(message);
+        if (command in commands) {
             commands[command].execute(message, args);
         }
         else {

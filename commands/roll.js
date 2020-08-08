@@ -28,7 +28,7 @@ module.exports = {
             isProf = true;
         })
         try {
-            if(args.includes('diff')) {
+            if (args.includes('diff')) {
                 dice = eval(args.slice(0, args.indexOf('diff')).join(''));
                 diff = eval(args.slice(args.indexOf('diff') + 1, args.length).join(''));
             } else {
@@ -36,12 +36,12 @@ module.exports = {
                 diff = Utils.BASE_DIFF;
             }
 
-            if(Utils.DOWNER <= diff <= Utils.REROLL) {    
+            if (Utils.DOWNER <= diff <= Utils.REROLL) {
                 let resObj = roller(dice, diff, isProf);
-                const embedResult = createResultEmbed(resObj.score, resObj.summery, 
+                const embedResult = createResultEmbed(resObj.score, resObj.summery,
                     `${message.author} rolled ${dice} dice with difficuly ${diff}` +
-                    `${isProf ? ' (Professional roll)': ''}` +
-                    `${roller == Utils.rollDiceFlat ? ' (Flat roll)': ''}`
+                    `${isProf ? ' (Professional roll)' : ''}` +
+                    `${roller == Utils.rollDiceFlat ? ' (Flat roll)' : ''}`
                 );
                 message.channel.send(embedResult);
 
@@ -49,7 +49,7 @@ module.exports = {
                 const embedError = createErrorEmbed(`${message.author}, ${diff} is not a valid difficulty.`);
                 message.channel.send(embedError);
             }
-        } catch(err) {
+        } catch (err) {
             const embedError = createErrorEmbed(`${message.author}, Command arguments are not valid.`, err.message);
             message.channel.send(embedError);
         }
@@ -64,7 +64,7 @@ module.exports = {
  * @param {Function} exec the function to execute if this option is valid.
  */
 const addOption = (name, args, exec) => {
-    if(args.includes(name)){
+    if (args.includes(name)) {
         exec();
         i = args.indexOf(name);
         args.splice(i, 1);
@@ -87,11 +87,11 @@ const createResultEmbed = (score, summery, desc) => {
     return embedResult;
 }
 
-const createErrorEmbed = (desc, js_error) => {
+const createErrorEmbed = (desc, jsError) => {
     const embedResult = new Discord.MessageEmbed().setTitle('Roll Error').setColor(ERROR_COLOR);
     embedResult.setDescription(desc);
-    if (js_error) {
-        embedResult.addField('JavaScript error:', `\`\`\`js\n${js_error}\n\`\`\``);
+    if (jsError) {
+        embedResult.addField('JavaScript error:', `\`\`\`js\n${jsError}\n\`\`\``);
     }
     return embedResult;
 }
