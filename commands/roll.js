@@ -36,7 +36,7 @@ module.exports = {
                 diff = Utils.BASE_DIFF;
             }
 
-            if (Utils.DOWNER <= diff <= Utils.REROLL) {
+            if (diff >= Utils.DOWNER && diff <= Utils.REROLL) {
                 let resObj = roller(dice, diff, isProf);
                 const embedResult = createResultEmbed(resObj.score, resObj.summery,
                     `${message.author} rolled ${dice} dice with difficuly ${diff}` +
