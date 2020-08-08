@@ -87,6 +87,14 @@ const createResultEmbed = (score, summery, desc) => {
     return embedResult;
 }
 
+/**
+ * Creates an embed for an error.
+ * 
+ * @param {string} desc a description of the error.
+ * @param {string} jsError the js message of the error.
+ * 
+ * @returns {Discord.MessageEmbed} a new error message embed.
+ */
 const createErrorEmbed = (desc, jsError) => {
     const embedResult = new Discord.MessageEmbed().setTitle('Roll Error').setColor(ERROR_COLOR);
     embedResult.setDescription(desc);
