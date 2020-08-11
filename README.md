@@ -1,13 +1,13 @@
 # WeaverBot
 A bot for used for the werewolf: the apocalypse game "Rage Across Israel"
 
-### Features
+#### Features
 
 * Dynamic and flexible syntax of commands
 * In command calculations
 * Easy and comfortible UI
 
-### Basic Usage
+#### Basic Usage
 
 To use the bot, add the prefix ```!w``` to your commands.
 For example, to echo the message "hello world", write:
@@ -16,7 +16,7 @@ For example, to echo the message "hello world", write:
 ```
 And the bot will write "hello world" in the same discord channel.
 
-### The Roll Command
+#### The Roll Command
 
 The roll command allows th user to roll a set of dice by the current ruleset of Rage Across Israel:
 
@@ -28,7 +28,7 @@ The roll command allows th user to roll a set of dice by the current ruleset of 
 
 ###### Basic Roll
 
-To roll 7 dice, foe example, simply use the command:
+To roll 7 dice, for example, simply use the command:
 ```
 !w roll 7
 ```
@@ -42,23 +42,23 @@ There are many operators you can use, such as:
 * ```-``` for subtraction (i.e. ```7 - 2```)
 * ```*``` for multiplication (i.e. ```2 * 5```)
 * ```/``` for division (i.e. ```8 / 4```)
-* ```**``` for power (i.e. ```2 ** 3 ```)
+* ```**``` for power (i.e. ```2 ** 3```)
 And more.
 
-### Difficulty
+#### Difficulty
 
 If you want to change the difficulty, you may use the ```diff``` option, with the number of the wanted difficulty. For example:
 ```
 !w roll 4 diff 5
 ```
-will roll 4 dice with a difficulty of 5. Note that a roll with difficulty below 1 or above 10 is not permited.
+will roll 4 dice with a difficulty of 5. Note that a roll with a difficulty below 1 or above 10 is not permited.
 You may also use calculations with this option, for example:
 ```
 !w roll 3 * 3 diff 8 - 4
 ```
 Will roll 9 dice with a difficulty of 4.
 
-### Proficiency
+#### Proficiency
 
 To roll a proficiency roll, just use the ```prof``` flag. For example:
 ```
@@ -71,7 +71,7 @@ This can be added anywhere in the command as long as it comes after the ```roll`
 !w roll 6 diff prof 8
 ```
 
-### Flat Roll
+#### Flat Roll
 
 You can also roll a roll with no rules that apply using the ```flat``` flag. This can be used for rolls like damage and soak. For example:
 ```
