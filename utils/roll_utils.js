@@ -20,7 +20,7 @@ module.exports = {
      * 
      * @returns {object} an object contaning the final result and summery.
      */
-    rollDiceFlat: (num, diff) => {
+    rollDiceFlat: (num, diff, will) => {
         let resultList = [];
         let finalScore = 0;
 
@@ -33,7 +33,7 @@ module.exports = {
         resultList.sort((a, b) => a - b);
 
         return {
-            score: finalScore,
+            score: finalScore + (1 ? will : 0),
             summery: resultList.join(' ')
         };
 
@@ -49,7 +49,7 @@ module.exports = {
      * 
      * @returns {object} an object contaning the final result and summery.
      */
-    rollDice: (num, diff, isProf, will) => {
+    rollDice: (num, diff, will, isProf) => {
         let isBotch = true;
         let resultList = [];
 
@@ -69,7 +69,7 @@ module.exports = {
         if (results.calc[0] == 1) {
             will = false;
         }
-        
+
         let finalScore = getScore(results.calc, results.reroll, diff, will);
         let summery = getSummery(resultList, results.calc, results.reroll);
 
