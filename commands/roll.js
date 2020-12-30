@@ -4,6 +4,7 @@ const Utils = require('../utils/roll_utils.js');
 const ROLL_COLOR = '#0099ff';
 const ERROR_COLOR = '#dc143c';
 
+
 module.exports = {
     name: 'roll',
     description: 'rolls a dice in current rullset',
@@ -18,6 +19,7 @@ module.exports = {
         let dice = 0;
         let diff = 0;
         let isProf = false;
+        let will = false;
         let roller = Utils.rollDice;
 
         addOption('flat', args, () => {
@@ -27,6 +29,11 @@ module.exports = {
         addOption('prof', args, () => {
             isProf = true;
         })
+
+        addOption('will', args, () => {
+            will = true;
+        })
+
         try {
             if (args.includes('diff')) {
                 dice = eval(args.slice(0, args.indexOf('diff')).join(''));
@@ -37,11 +44,12 @@ module.exports = {
             }
 
             if (diff >= Utils.DOWNER && diff <= Utils.REROLL) {
-                let resObj = roller(dice, diff, isProf);
+                let resObj = roller(dice, diff, isProf, will);
                 const embedResult = createResultEmbed(resObj.score, resObj.summery,
-                    `${message.author} rolled ${dice} dice with difficuly ${diff}` +
+                    `${message.author} rolled ${dice} dice with difficulty ${diff}` +
                     `${isProf ? ' (Professional roll)' : ''}` +
-                    `${roller == Utils.rollDiceFlat ? ' (Flat roll)' : ''}`
+                    `${roller == Utils.rollDiceFlat ? ' (Flat roll)' : ''}` + 
+                    `${will ? ', willpower spent.' : ''}`
                 );
                 message.channel.send(embedResult);
 

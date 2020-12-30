@@ -45,16 +45,17 @@ module.exports = {
      * @param {number} num the number of dice.
      * @param {number} diff the difficulty of the roll.
      * @param {boolean} isProf is the roll proffcinal or not.
+     * @param {boolean} will di
      * 
      * @returns {object} an object contaning the final result and summery.
      */
-    rollDice: (num, diff, isProf) => {
+    rollDice: (num, diff, isProf, will) => {
         let isBotch = true;
         let resultList = [];
 
         for (let i = 0; i < num; i++) {
             resultList[i] = Math.ceil(Math.random() * module.exports.SIDES);
-            if (resultList[i] >= diff) {
+            if (resultList[i] >= diff || will) {
                 isBotch = false;
             }
         }
@@ -62,10 +63,14 @@ module.exports = {
         resultList.sort((a, b) => a - b);
         if (resultList[0] != 1) {
             isBotch = false;
-        }
+        } 
 
         let results = calculateResult(resultList, diff, isProf);
-        let finalScore = getScore(results.calc, results.reroll, diff);
+        if (results.calc[0] == 1) {
+            will = false;
+        }
+        
+        let finalScore = getScore(results.calc, results.reroll, diff, will);
         let summery = getSummery(resultList, results.calc, results.reroll);
 
         return {
@@ -116,10 +121,11 @@ const calculateResult = (resultList, diff, isProf) => {
  * @param {Array} calcResults the array of the true results.
  * @param {Array} rerollResults the array of the reroll results.
  * @param {number} diff the difficulty of the roll.
+ * @param {boolean} will whethear willpower was invested.
  * 
  * @returns {number} the final result of the roll.
  */
-const getScore = (calcResults, rerollResults, diff) => {
+const getScore = (calcResults, rerollResults, diff, will) => {
 
     const summer = (prevSum, current) => {
         if (current >= diff) {
@@ -138,7 +144,7 @@ const getScore = (calcResults, rerollResults, diff) => {
         finalScore += rerollResults.reduce(summer, 0);
     }
 
-    return finalScore;
+    return finalScore + (1 ? will : 0);
 
 }
 
