@@ -6,10 +6,7 @@ const fs = require('fs');
 const client = new Discord.Client();
 
 /** The prifixs for the command*/
-const PREFIX = '!w '
-
-/** Discord bot token*/
-const token = 'NzM2MjI0MDA1OTk2MDE5Nzkz.XxrsCQ.7AHveAAamlHlPNWW3Y1OrwXPMNM';
+const PREFIX = '!w ';
 
 /** Command Dictionary */
 let commands = {};
@@ -30,6 +27,17 @@ client.once('ready', () => {
     console.log('WeaverBot is online');
 });
 
+
+const aliases = {
+    'soak': (args) => {args.push('flat'); return 'roll';},
+    'damage': (args) => {args.push('flat'); return 'roll';},
+    'dmg': (args) => {args.push('flat'); return 'roll';},
+    'prof': (args) => {args.push('prof'); return 'roll';},
+    'r': (args) => {return 'roll';},
+    's': (args) => {args.push('flat'); return 'roll';},
+    'd': (args) => {args.push('flat'); return 'roll';},
+    'p': (args) => {args.push('prof'); return 'roll';},
+}
 
 /**
  * Checks if a message was in the right command format.
@@ -59,7 +67,12 @@ const analizeCommand = message => {
  */
 client.on('message', message => {
     if (isCommand(message)) {
-        const { command, args } = analizeCommand(message);
+        let { command, args } = analizeCommand(message);
+        
+        if (command in aliases) {
+            command = aliases[command](args);
+        }
+
         if (command in commands) {
             commands[command].execute(message, args);
         }
@@ -70,4 +83,4 @@ client.on('message', message => {
 });
 
 
-client.login(token);
+client.login(process.env.BOT_LOGIN);
