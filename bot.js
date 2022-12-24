@@ -66,17 +66,22 @@ const analizeCommand = message => {
  * calculates it.
  */
 client.on('message', message => {
+
     if (isCommand(message)) {
+
         let { command, args } = analizeCommand(message);
-        
+        console.log('WeaverBot got a message from user');
+
         if (command in aliases) {
             command = aliases[command](args);
         }
 
         if (command in commands) {
+            console.log(`executing command: ${command}`)
             commands[command].execute(message, args);
         }
         else {
+            console.log(`command ${command} not found`)
             message.channel.send(`Command ${command} does not exist. Please try again.`);
         }
     }

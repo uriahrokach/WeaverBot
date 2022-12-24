@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/uriahrokach/WeaverBot#readme",
   "dependencies": {
-    "discord.js": "^12.2.0"
+    "discord.js": "12.2.0"
   }
 }
