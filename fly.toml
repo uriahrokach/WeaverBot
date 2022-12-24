@@ -1,0 +1,3 @@
+# fly.toml file generated for weaverbot on 2022-12-04T08:52:21+02:00
+
+app = "weaverbot"
