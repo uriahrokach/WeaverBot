@@ -4,6 +4,7 @@ on:
     branches:
       - master
 env:
+  # Deploy with token
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 jobs:
   deploy:
